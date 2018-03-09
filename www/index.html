@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        var module = ons.bootstrap();
+        ons.disableAutoStatusBarFill();  // (Monaca enables StatusBar plugin by default)
+    </script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="AppController">
+    
+    <ons-tabbar>
+        <ons-tab page="scanner.html" active="true" icon="fa-barcode" label="スキャナ" no-reload></ons-tab>
+        <ons-tab page="history.html" icon="fa-list" label="履歴" no-reload></ons-tab>
+    </ons-tabbar>
+    
+    <ons-template id="scanner.html">
+        <ons-navigator var="navi">
+            <ons-page>
+                <ons-toolbar>
+                    <div class="center">スキャン開始</div>
+                </ons-toolbar>
+                <div class="scanner-wrapper">
+                    <p class="scanner-label">受取場・組合員のバーコードをスキャンして、詳細情報を見てみましょう</p>
+                    <div class="scanner-eye-catch">
+                        <ons-icon icon="fa-barcode" size="160px"></ons-icon>
+                    </div>
+                    <ons-button class="scanner-button" modifier="large--cta" ng-click="scan()">スキャンする</ons-button>
+                </div>
+            </ons-page>
+        </ons-navigator>
+    </ons-template>
+    
+    <ons-template id="loading.html">
+        <ons-alert-dialog>
+            <div class="alert-dialog-title">処理中...</div>
+            <div class="alert-dialog-content">
+                <ons-icon icon="ion-load-c" spin="true"></ons-icon> <span style="font-size: 13px; color: #999">情報を検索しています...</span>
+            </div>
+        </ons-alert-dialog>
+    </ons-template>
+
+    <ons-template id="details.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left"><ons-back-button ons-if-platform="ios">戻る</ons-back-button></div>
+                <div class="center">詳細</div>
+                <div class="right"><ons-toolbar-button ng-click="delHistory()">削除</ons-toolbar-button></div>
+            </ons-toolbar>
+            <div class="detail-wrapper">
+                <div class="detail-title">
+                    ナマエ: {{currentProduct.nm}}
+                </div>
+                <div class="detail-kakka">
+                    検索結果: {{currentProduct.idnm}}
+                </div>
+                <div class="detail-kumcd">
+                    組合員CD: {{currentProduct.kumcd}}
+                </div>
+                <div class="detail-ukecd">
+                    受取場CD: {{currentProduct.ukecd}}
+                </div>
+                <div class="detail-haijun">配順: {{currentProduct.haijun}}</div>
+                <div class="detail-ido">緯度: {{currentProduct.ido}}</div>
+                <div class="detail-keido">経度: {{currentProduct.keido}}</div>
+                <div class="detail-keido">住所: {{currentProduct.adr}}</div>
+                <ons-button modifier="large" ng-click="openWithBrowser(currentProduct.url,1)">地図を表示する（位置）</ons-button>
+                <br>
+                <ons-button modifier="large" ng-click="openWithBrowser(currentProduct.url2,2)">地図を表示する（住所）</ons-button>
+                <br>
+            </div>
+        </ons-page>
+    </ons-template>
+    
+    <ons-template id="history.html">
+        <ons-navigator var="navi">
+            <ons-page>
+                <ons-toolbar>
+                    <div class="center">スキャン履歴</div>
+                    <div class="right"><ons-toolbar-button ng-click="clearHistory()">クリア</ons-toolbar-button></div>
+                </ons-toolbar>
+                <ons-list>
+                    <ons-list-item ng-repeat="product in history track by $index" 
+                        class="item-wrapper" modifier="chevron" ng-click="selectProduct(product,$index)">
+                        <div class="item-title">ナマエ: {{product.nm}}</div>
+                        <ons-row>
+                            <ons-col>
+                                <div class="item-kekka">
+                                    検索結果: {{product.idnm}}
+                                </div>
+                                <div class="item-kumcd">
+                                    組合員CD: {{product.kumcd}}
+                                </div>
+                                <div class="item-ukecd">
+                                    受取場CD: {{product.ukecd}}
+                                </div>
+                                <div class="item-haijun">
+                                    配順: {{product.haijun}}
+                                </div>
+                            </ons-col>
+                        </ons-row>
+                    </ons-list-item>
+                </ons-list>
+                <div ng-show="history.length === 0" class="empty-history">
+                    履歴がありません
+                </div>
+            </ons-page>
+        </ons-navigator>
+    </ons-template>
+    
+</body>
+</html>
