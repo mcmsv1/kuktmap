@@ -13,8 +13,7 @@ module.factory('Product', function() {
    var Product = function(params) {
        this.id=params.id;
        this.idnm=params.idnm;
-       this.kumcd=params.kumcd;
-       this.ukecd = params.ukecd;
+       this.cd = params.cd;
        this.ido = params.ido;
        this.keido = params.keido;
        this.haijun = params.haijun;
@@ -88,7 +87,7 @@ module.controller('AppController', function($scope, Product, $http) {
         var arr=ret.split(',');
         var apiUrl = 'http://maps.google.com/maps?q=';
         
-        if(Object.keys(arr).length<8){
+        if(Object.keys(arr).length<7){
             failCallback();
             return false;
         }
@@ -106,8 +105,8 @@ module.controller('AppController', function($scope, Product, $http) {
             var para
             var para2
             
-            para=firstResult[3]+','+firstResult[4]
-            para2=firstResult[7]
+            para=firstResult[2]+','+firstResult[3]
+            para2=firstResult[6]
             
             pid=firstResult[0];
                         
@@ -118,21 +117,23 @@ module.controller('AppController', function($scope, Product, $http) {
                 case "100" : pidnm="◎組合員住所完全一致" ; break ;
                 case "101" : pidnm="△組合員住所部分一致" ; break ;
                 case "102" : pidnm="◎組合員住所手動変更" ; break ;
-                case "600" : pidnm="コメント情報" ; break ;
-                case "700" : pidnm="写真情報" ; break ;
+                case "200" : pidnm="◎職員住所完全一致" ; break ;
+                case "201" : pidnm="△職員住所部分一致" ; break ;
+                case "202" : pidnm="◎職員住所手動変更" ; break ;
+                case "600" : pidnm="受取場コメント情報" ; break ;
+                case "700" : pidnm="受取場写真情報" ; break ;
                 default : pidnm="検索結果候補なし" ; break ;
             }
             
             return new Product({
                 id: pid,
                 idnm: pidnm,
-                kumcd: firstResult[1],
-                ukecd: firstResult[2],
-                ido: firstResult[3],
-                keido: firstResult[4],
-                haijun: firstResult[5],
-                nm: firstResult[6],
-                adr: firstResult[7],
+                cd: firstResult[1],
+                ido: firstResult[2],
+                keido: firstResult[3],
+                haijun: firstResult[4],
+                nm: firstResult[5],
+                adr: firstResult[6],
                 url: secondResult+para,
                 url2: secondResult+para2
             });

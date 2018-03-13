@@ -26,7 +26,7 @@
                     <div class="center">スキャン開始</div>
                 </ons-toolbar>
                 <div class="scanner-wrapper">
-                    <p class="scanner-label">受取場・組合員のバーコードをスキャンして、詳細情報を見てみましょう</p>
+                    <p class="scanner-label">受取場・組合員・職員のバーコードをスキャンして、詳細情報を見てみましょう</p>
                     <div class="scanner-eye-catch">
                         <ons-icon icon="fa-barcode" size="160px"></ons-icon>
                     </div>
@@ -59,11 +59,8 @@
                 <div class="detail-kakka">
                     検索結果: {{currentProduct.idnm}}
                 </div>
-                <div class="detail-kumcd">
-                    組合員CD: {{currentProduct.kumcd}}
-                </div>
                 <div class="detail-ukecd">
-                    受取場CD: {{currentProduct.ukecd}}
+                    コード: {{currentProduct.cd}}
                 </div>
                 <div class="detail-haijun">配順: {{currentProduct.haijun}}</div>
                 <div class="detail-ido">緯度: {{currentProduct.ido}}</div>
@@ -93,11 +90,8 @@
                                 <div class="item-kekka">
                                     検索結果: {{product.idnm}}
                                 </div>
-                                <div class="item-kumcd">
-                                    組合員CD: {{product.kumcd}}
-                                </div>
                                 <div class="item-ukecd">
-                                    受取場CD: {{product.ukecd}}
+                                    コード: {{product.cd}}
                                 </div>
                                 <div class="item-haijun">
                                     配順: {{product.haijun}}
