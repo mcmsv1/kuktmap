@@ -120,6 +120,7 @@ module.controller('AppController', function($scope, Product, $http) {
                 case "200" : pidnm="◎職員住所完全一致" ; break ;
                 case "201" : pidnm="△職員住所部分一致" ; break ;
                 case "202" : pidnm="◎職員住所手動変更" ; break ;
+                case "203" : pidnm="職員住所名検索" ; break ;
                 case "600" : pidnm="受取場コメント情報" ; break ;
                 case "700" : pidnm="受取場写真情報" ; break ;
                 default : pidnm="検索結果候補なし" ; break ;
@@ -161,6 +162,17 @@ module.controller('AppController', function($scope, Product, $http) {
 
     $scope.openWithBrowser = function(url,flg) {
         // 外部ブラウザで開く
+        if(flg==1){
+            if($scope.currentProduct.ido=="0"){
+                ons.notification.alert({
+                    title: '表示不可',
+                    message: '位置情報がありません！',
+                    buttonLabel: 'OK',
+                    animation: 'default', // もしくは'none'
+                });
+                return false;
+            }
+        }
         if(flg==2){
             if($scope.currentProduct.adr=="　"){
                 ons.notification.alert({
