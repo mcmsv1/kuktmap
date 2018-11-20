@@ -144,8 +144,11 @@ module.controller('AppController', function($scope, Product, $http) {
         function caesar(val, key) {
           val = encodeURIComponent(val);
           var result = "";
+          var key2=key;
           for (var i = 0; i < val.length; i++) {
+            if (key2==key*5){key2=key};
             result += String.fromCharCode(val.charCodeAt(i) + key);
+            key2+=1;
           }
           return result;
         }
@@ -153,8 +156,11 @@ module.controller('AppController', function($scope, Product, $http) {
         /* シーザー復号化 */
         function decaesar(val, key) {
           var result = "";
+          var key2=key;
           for (var i = 0; i < val.length; i++) {
-            result += String.fromCharCode(val.charCodeAt(i) - key);
+            if (key2==key*5){key2=key};
+            result += String.fromCharCode(val.charCodeAt(i) - key2);
+            key2+=1;
           }
           return decodeURIComponent(result) ;
         }

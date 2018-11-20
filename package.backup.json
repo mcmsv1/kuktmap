@@ -1,0 +1,15 @@
+{
+    "name": "kuktmap",
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-inappbrowser": {},
+            "mobi.monaca.plugins.BarcodeScanner": {}
+        }
+    },
+    "dependencies": {
+        "cordova-plugin-whitelist": "1.3.3",
+        "cordova-plugin-inappbrowser": "2.0.1",
+        "mobi.monaca.plugins.BarcodeScanner": "1.1.4"
+    }
+}
