@@ -163,8 +163,7 @@ module.controller('AppController', function($scope, Product, $http) {
             result += String.fromCharCode(val.charCodeAt(i) - key2);
             key2+=1;
           }
-          return decodeURIComponent(result);
-          return result;
+          return decodeURIComponent(result)
     };
 
     $scope.openWithBrowser = function(url,flg) {
