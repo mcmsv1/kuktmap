@@ -82,8 +82,8 @@ module.controller('AppController', function($scope, Product, $http) {
         //  暗号化したデータを複合化
         var ret;
         var key=4;
-        ret=decaesar(getStr,key);
-        
+        ret=$scope.decaesar(getStr,key);
+
         var arr=ret.split(',');
         var apiUrl = 'http://maps.google.com/maps?q=';
         
@@ -139,9 +139,10 @@ module.controller('AppController', function($scope, Product, $http) {
                 url2: secondResult+para2
             });
         }
-        
-        /* シーザーー暗号化 */
-        function caesar(val, key) {
+    };
+
+    /* シーザーー暗号化 */
+    $scope.caesar=function(val, key) {
           val = encodeURIComponent(val);
           var result = "";
           var key2=key;
@@ -151,19 +152,19 @@ module.controller('AppController', function($scope, Product, $http) {
             key2+=1;
           }
           return result;
-        }
-        
-        /* シーザー復号化 */
-        function decaesar(val, key) {
-          var result = "";
+    };
+
+    /* シーザー復号化 */
+    $scope.decaesar=function(val, key){
+      var result = "";
           var key2=key;
           for (var i = 0; i < val.length; i++) {
             if (key2==key*5){key2=key};
             result += String.fromCharCode(val.charCodeAt(i) - key2);
             key2+=1;
           }
-          return decodeURIComponent(result) ;
-        }
+          return decodeURIComponent(result);
+          return result;
     };
 
     $scope.openWithBrowser = function(url,flg) {
